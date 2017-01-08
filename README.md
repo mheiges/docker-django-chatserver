@@ -27,5 +27,20 @@ in a Docker container.
       django-chatserver  
 
 
+#### Use runserver
+
+By default the chat server runs as a uWSGI server. To use the
+`manage.py runserver` development mode, set the `USE_RUNSERVER`
+environment variable.
+
+    docker run -it --rm -p 8000:8000 \
+      -e USE_RUNSERVER=1 \
+      -v ~/Repositories/django-websocket-redis/examples:/usr/src/app/chatserver \
+      django-chatserver  
+
+**[You can not use Safari > 10.1 with
+runserver.](https://github.com/jrief/django-websocket-redis/issues/206)**
+Chrome and Firefox are ok.
+
 #### Access the chat server in a browser at
 [http://localhost:8000/chat/](http://localhost:8000/chat/)

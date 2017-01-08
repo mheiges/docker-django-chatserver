@@ -18,16 +18,10 @@ RUN apk --no-cache add redis gcc musl-dev \
 
 ENV DJANGO_SETTINGS_MODULE=chatserver.settings
 
+COPY start.sh /start.sh
+
 EXPOSE 8000
 
 WORKDIR /usr/src/app/chatserver
 
-CMD redis-server & \
-    uwsgi \
-      --chdir='/usr/src/app/chatserver' \
-      --module=wsgi:application \
-      --master \
-      --http=0.0.0.0:8000 \
-      --processes=5 \
-      --http-websockets \
-      --vacuum
+CMD ["/start.sh"]
